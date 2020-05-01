@@ -11,13 +11,21 @@ namespace ConsoleApp1
         private int iMemberNum;
 
         public MemberCollection()
-        { /////////////////////// WHY IS THIS CONSTRUCTOR CALLED EVERYTIME NEW MEMBER IS REGISTERED? /////////////////////
+        { 
             members = new Member[maxMemberNumber];
             iMemberNum = 0;
-            Member testMember = new Member("Mike", "Chen", "1234 address", "1234", "1234"); //Test Member
-            addNewMember(testMember);
-            Console.WriteLine("CALL");
+        }
 
+        public bool checkMemberExists(string name)
+        {
+            for (int i = 0; i < iMemberNum; i++)
+            {
+                if (name.Equals(members[i].getName()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public void addNewMember(Member member)
         {
@@ -35,15 +43,12 @@ namespace ConsoleApp1
         {
             if (members[0] != null)
             {
-
-
-                foreach (Member person in members)
+                for (int i = 0; i < iMemberNum; i++)
                 {
-                    if (fullName == person.name)
+                    if (fullName.Equals(members[i].getName()))
                     {
-                        return person.phoneNumber;
+                        return members[i].getPhoneNumber();
                     }
-
                 }
                 return null;
             }

@@ -6,11 +6,12 @@ namespace ConsoleApp1
 {
     class Member
     {
-        public string name;
-        public string address;
-        public string phoneNumber;
-        public string password;
-        public string userName;
+        private string name;
+        private string address;
+        private string phoneNumber;
+        private string password;
+        private string userName;
+        //private Movie array
         public Member(string firstName, string lastName, string address, string phoneNumber, string password)
         {
             this.name = firstName + " " + lastName;
@@ -19,6 +20,16 @@ namespace ConsoleApp1
             this.password = password;
             this.userName = lastName + firstName;
 
+        }
+
+        public string getName()
+        {
+            return name;
+        }
+
+        public string getPhoneNumber()
+        {
+            return phoneNumber;
         }
     }
 }

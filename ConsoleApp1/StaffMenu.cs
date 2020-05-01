@@ -74,6 +74,7 @@ namespace ConsoleApp1
                     break;
 
             }
+            staffMenu();
         }
 
         private int staffSetUp()
@@ -107,14 +108,10 @@ namespace ConsoleApp1
             Console.WriteLine("Enter member's last name:");
             lastName = Console.ReadLine();
             fullName = firstName + " " + lastName;
-            foreach (Member person in mc.members)
+            if (mc.checkMemberExists(fullName))
             {
-                if (fullName == person.name)
-                {
-                    Console.WriteLine("\n\nMember already registered.");
-                    return null;
-                }
-
+                Console.WriteLine("This member already exists.");
+                return null;
             }
             Console.WriteLine("Enter member's address:");
             address = Console.ReadLine();
