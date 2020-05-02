@@ -57,11 +57,11 @@ namespace ConsoleApp1
                     break;
 
                 case 1:
-                    //staffLogin();
+                    addMovie();
                     break;
 
                 case 2:
-                    //memberLogin();
+                    //removeMovie();
                     break;
 
                 case 3:
@@ -94,6 +94,155 @@ namespace ConsoleApp1
             return intSelection;
 
         }
+
+        private Movie addMovie()
+        {
+            string title;
+            string starring;
+            string director;
+            string genre = "Undefined";
+            string classification = "Undefined";
+            string duration;
+            string releaseDate;
+            string copiesAvailableString;
+            int copiesAvailable;
+            Console.WriteLine("Enter the movie title: ");
+            title = Console.ReadLine();
+//            if (moc.checkMovieExists(title))
+//                {
+//                    Console.WriteLine("This movie already exists.");
+//                    return null;
+//                }
+            Console.WriteLine("Enter the starring actor(s): ");
+            starring = Console.ReadLine();
+            Console.WriteLine("Enter the director(s): ");
+            director = Console.ReadLine();
+            Console.WriteLine("\nSelect the genre: ");
+            Console.WriteLine("1. Drama");
+            Console.WriteLine("2. Adventure");
+            Console.WriteLine("3. Family");
+            Console.WriteLine("4. Action");
+            Console.WriteLine("5. Sci-Fi");
+            Console.WriteLine("6. Comedy");
+            Console.WriteLine("7. Thriller");
+            Console.WriteLine("8. Other");
+
+            switch (genreInput())
+            {
+                case 1:
+                    genre = "Drama";
+                    break;
+
+                case 2:
+                    genre = "Adventure";
+                    break;
+
+                case 3:
+                    genre = "Family";
+                    break;
+
+                case 4:
+                    genre = "Action";
+                    break;
+
+                case 5:
+                    genre = "Sci-Fi";
+                    break;
+
+                case 6:
+                    genre = "Comedy";
+                    break;
+
+                case 7:
+                    genre = "Thriller";
+                    break;
+
+                case 8:
+                    genre = "Other";
+                    break;
+
+            }
+
+            Console.WriteLine("\nSelect the classification: ");
+            Console.WriteLine("1. General (G)");
+            Console.WriteLine("2. Parental Guidance (PG)");
+            Console.WriteLine("3. Mature (M15+)");
+            Console.WriteLine("4. Mature Accompanied (MA15+)");
+
+            switch (classificationInput())
+            {
+                case 1:
+                    classification = "Drama";
+                    break;
+
+                case 2:
+                    classification = "Adventure";
+                    break;
+
+                case 3:
+                    classification = "Family";
+                    break;
+
+                case 4:
+                    classification = "Action";
+                    break;
+            }
+
+            duration = assertNumber("Enter the duration (minutes): ");
+            releaseDate = assertNumber("Enter the release date (year): ");
+            copiesAvailableString = assertNumber("Enter the number of copies available: ");
+            int.TryParse(copiesAvailableString, out copiesAvailable);
+
+            return new Movie(title, starring, director, duration, genre, classification, releaseDate, copiesAvailable);
+
+            // Genre selection ensuring selection between 1 - 8
+            int genreInput()
+            {
+                Console.WriteLine("Make Selection (1-8): ");
+                string stringInput = Console.ReadLine();
+                int intOutput;
+                while (!((int.TryParse(stringInput, out intOutput)) && ((intOutput >=1) && (intOutput <= 8))))
+                {
+                    Console.Write("Error: Invalid Input\n");
+                    Console.WriteLine("\n\nPlease make a selection (1-8):");
+                    stringInput = Console.ReadLine();
+                }
+                return intOutput;
+            }
+
+            // Classification selection ensuring selection between 1 - 4
+            int classificationInput()
+            {
+                Console.WriteLine("Make Selection (1-4): ");
+                string stringInput = Console.ReadLine();
+                int intOutput;
+                while (!((int.TryParse(stringInput, out intOutput)) && ((intOutput >= 1) && (intOutput <= 4))))
+                {
+                    Console.Write("Error: Invalid Input\n");
+                    Console.WriteLine("\n\nPlease make a selection (1-4):");
+                    stringInput = Console.ReadLine();
+                }
+                return intOutput;
+            }
+
+            // Ensures string input is numeric
+            string assertNumber(string prompt)
+            {
+                Console.WriteLine(prompt);
+
+                string number = Console.ReadLine();
+                // Ensures password is a 4 digit integer
+                while (!(int.TryParse(number, out int numberInt)))
+                {
+                    Console.WriteLine("Please input a number");
+                    Console.WriteLine(prompt);
+                    number = Console.ReadLine();
+                }
+
+                return number;
+            }
+        }
+
 
         private Member registerMember()
         {
