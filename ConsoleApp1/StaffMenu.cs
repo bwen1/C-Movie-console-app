@@ -11,11 +11,15 @@ namespace ConsoleApp1
         private const string staffPassword = "today123";
         private Program p;
         private MemberCollection mc;
+        private MovieCollection moc;
+
 
         public StaffMenu(Program pr)
         {
             p = pr;
             mc = new MemberCollection();
+            moc = new MovieCollection();
+
         }
 
 
@@ -57,7 +61,7 @@ namespace ConsoleApp1
                     break;
 
                 case 1:
-                    addMovie();
+                    moc.add(createMovie());
                     break;
 
                 case 2:
@@ -95,7 +99,7 @@ namespace ConsoleApp1
 
         }
 
-        private Movie addMovie()
+        private Movie createMovie()
         {
             string title;
             string starring;
@@ -105,14 +109,21 @@ namespace ConsoleApp1
             string duration;
             string releaseDate;
             string copiesAvailableString;
+            string copiesAddedString;
             int copiesAvailable;
+            int copiesAdded;
             Console.WriteLine("Enter the movie title: ");
             title = Console.ReadLine();
-//            if (moc.checkMovieExists(title))
-//                {
-//                    Console.WriteLine("This movie already exists.");
-//                    return null;
-//                }
+
+            if (moc.movieExists(title)) // Movie exists, add copies
+            {
+                copiesAddedString = assertNumber("Enter the number of copies you would like to add:");
+                int.TryParse(copiesAddedString, out copiesAdded);
+                moc.getMovieByTitle(title).addCopies(copiesAdded);
+                Console.WriteLine(title + " now has " + moc.getMovieByTitle(title).getCopiesAvailable() + " copies available.");
+                return null;
+            }
+
             Console.WriteLine("Enter the starring actor(s): ");
             starring = Console.ReadLine();
             Console.WriteLine("Enter the director(s): ");

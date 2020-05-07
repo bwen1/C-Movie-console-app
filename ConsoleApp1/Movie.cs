@@ -29,5 +29,31 @@ namespace ConsoleApp1
             this.copiesAvailable = copiesAvailable;
 
         }
+
+        public string getTitle()
+        {
+            return title;
+        }
+
+        public int getCopiesAvailable()
+        {
+            return copiesAvailable;
+        }
+
+        public void addCopies(int copies)
+        {
+            copiesAvailable += copies;
+        }
+
+        public void rentMovie()
+        {
+            if (!(copiesAvailable > 0)) 
+            {
+                Console.WriteLine("This DVD is unavailable.");
+                return;
+            }
+
+            copiesAvailable -= 1;
+        }
     }
 }

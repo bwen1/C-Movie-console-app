@@ -12,6 +12,7 @@ namespace ConsoleApp1
 
         public MemberCollection()
         { 
+
             members = new Member[maxMemberNumber];
             iMemberNum = 0;
         }
@@ -48,6 +49,38 @@ namespace ConsoleApp1
                     if (fullName.Equals(members[i].getName()))
                     {
                         return members[i].getPhoneNumber();
+                    }
+                }
+                return null;
+            }
+            else return null;
+        }
+
+        public Member getMemberFromName(string name)
+        {
+            if (members[0] != null)
+            {
+                for (int i = 0; i < iMemberNum; i++)
+                {
+                    if (members[i].getName() == name)
+                    {
+                        return members[i];
+                    }
+                }
+                return null;
+            }
+            else return null;
+        }
+
+        public Member logIn(string username, string password)
+        {
+            if (members[0] != null)
+            {
+                for (int i = 0; i < iMemberNum; i++)
+                {
+                    if ((username == members[i].getUserName()) && (password == members[i].getPassword()))
+                    {
+                        return members[i]; 
                     }
                 }
                 return null;

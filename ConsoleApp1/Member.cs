@@ -27,6 +27,16 @@ namespace ConsoleApp1
             return name;
         }
 
+        public string getUserName()
+        {
+            return userName;
+        }
+
+        public string getPassword()
+        {
+            return password;
+        }
+
         public string getPhoneNumber()
         {
             return phoneNumber;

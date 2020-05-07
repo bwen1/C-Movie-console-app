@@ -6,34 +6,33 @@ namespace ConsoleApp1
 {
     class MemberMenu
     {
-        // For development purposes
-        private const string memberUsername = "member";
-        private const string memberPassword = "today123";
         private Program p;
+        private MemberCollection mc;
+        private MovieCollection moc;
+        private Member loggedInUser;
         
         public MemberMenu (Program pr)
         {
             p = pr;
+            mc = new MemberCollection();
+            moc = new MovieCollection();
+
         }
-        public void memberLogin()
+        public void memberLogin() // NOT WORKING
         {
             Console.WriteLine("\nEnter Username:");
-            string stringUsername = Console.ReadLine();
+            string username = Console.ReadLine();
             Console.WriteLine("Enter Password:");
-            string stringPassword = Console.ReadLine();
+            string password = Console.ReadLine();
 
-            if ((stringUsername == memberUsername) && (stringPassword == memberPassword))
-            {
-                memberMenu();
-
-            }
-
-            else
+            if (mc.logIn(username, password) == null)
             {
                 Console.WriteLine("\nYour logon information was incorrect.");
                 p.mainMenu();
             }
 
+            loggedInUser = mc.logIn(username, password);
+            memberMenu();
         }
 
         public void memberMenu()

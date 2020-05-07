@@ -6,8 +6,15 @@ namespace ConsoleApp1
     {
 
         private static bool exitApp = false;
-        MemberMenu mm;
-        StaffMenu sm;
+        private MemberMenu mm;
+        private StaffMenu sm;
+ 
+
+        public Program()
+        {
+            mm = new MemberMenu(this);
+            sm = new StaffMenu(this);
+        }
 
         static void Main(string[] args)
         {
@@ -16,15 +23,11 @@ namespace ConsoleApp1
             while (exitApp == false)
             {
                 p.mainMenu();
+
             }
 
         }
-        public Program()
-        {
-            mm = new MemberMenu(this);
-            sm = new StaffMenu(this);
-            
-        }    
+         
         // Main Menu
         public void mainMenu()
         {
