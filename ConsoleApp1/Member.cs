@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ConsoleApp1
@@ -11,7 +12,11 @@ namespace ConsoleApp1
         private string phoneNumber;
         private string password;
         private string userName;
-        //private Movie array
+
+        private const int maxMoviesBorrowed = 10;
+        public string[] movies;
+        private int iMovieNum;
+
         public Member(string firstName, string lastName, string address, string phoneNumber, string password)
         {
             this.name = firstName + " " + lastName;
@@ -19,6 +24,7 @@ namespace ConsoleApp1
             this.phoneNumber = phoneNumber;
             this.password = password;
             this.userName = lastName + firstName;
+            iMovieNum = 0;
 
         }
 
@@ -40,6 +46,67 @@ namespace ConsoleApp1
         public string getPhoneNumber()
         {
             return phoneNumber;
+        }
+
+        public void borrowMovie(string movieTitle)
+        {
+            if (iMovieNum == maxMoviesBorrowed)
+                Console.WriteLine("You have reached the maximum movies borrowed.\n"); // Reached max limit
+            else
+            {
+                movies[iMovieNum++] = movieTitle;
+                Console.WriteLine(movieTitle + " borrowed.\n");
+            }
+        }
+
+        public bool userHasMovie(string movieTitle)
+        {
+            for (int i = 0; i < iMovieNum; i++)
+            {
+                if (movieTitle.Equals(movies[i]))
+                {
+                    return true; // Movie found
+                }
+            }
+
+            return false; // Movie does not exist
+        }
+
+        public void returnMovie(string movieTitle)
+        {
+            for (int i = 0; i < iMovieNum; i++)
+            {
+                if (movieTitle.Equals(movies[i]))
+                {
+                    movies[iMovieNum--] = "" ; // Movie removed
+                    Console.WriteLine("Movie DVD returned.\n");
+                    return;
+                }
+            }
+            Console.WriteLine("Something went wrong.\n"); // Shouldn't be possible to reach here
+        }
+
+        public string listBorrowedMovies()
+        {
+            string moviesBorrowed = "";
+            if (iMovieNum == 0)
+            {
+                return "You have no borrowed movies.";
+            }
+
+            for (int i = 0; i < iMovieNum; i++)
+            {
+                if (i == 0) // If first movie in list, don't add comma
+                {
+                    moviesBorrowed.Concat(movies[i]); 
+                }
+                else
+                {
+                    moviesBorrowed.Concat(", " + movies[i]);
+                }
+                
+            }
+            return "You are borrowing: \n" + moviesBorrowed;
         }
     }
 }

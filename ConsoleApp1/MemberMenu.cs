@@ -53,19 +53,19 @@ namespace ConsoleApp1
                     break;
 
                 case 1:
-                    //staffLogin();
+                    printMovies(); // TODO
                     break;
 
                 case 2:
-                    //memberLogin();
+                    borrowMovie(); // Not tested
                     break;
 
                 case 3:
-                    //memberLogin();
+                    returnMovie(); // Not tested
                     break;
 
                 case 4:
-                    //memberLogin();
+                    listBorrowedMovies(); // Not tested
                     break;
 
                 case 5:
@@ -75,7 +75,7 @@ namespace ConsoleApp1
             }
         }
 
-        static int memberSetUp()
+        private int memberSetUp()
         {
             Console.WriteLine("\n\nPlease make a selection (1-5, or 0 to return to main menu):");
             string stringSelection = Console.ReadLine();
@@ -90,6 +90,53 @@ namespace ConsoleApp1
 
             }
             return intSelection;
+        }
+
+        private string printMovies()
+        {
+            // BST traversal
+            return null;
+        }
+
+        private void borrowMovie()
+        {
+            string movieTitle;
+            Console.WriteLine("Enter movie title:");
+            movieTitle = Console.ReadLine();
+
+            if ((moc.movieExists(movieTitle)) && (moc.getMovieByTitle(movieTitle).getCopiesAvailable() > 0)) // If movie exists and has copies available
+            {
+                moc.getMovieByTitle(movieTitle).addCopies(-1); // Reducing available copies by 1
+                loggedInUser.borrowMovie(movieTitle); // Adding movie to member object
+                moc.getMovieByTitle(movieTitle).movieBorrowed(); // Keeping track of how many times movie is borrowed
+            }
+            else
+            {
+                Console.WriteLine(movieTitle + " is unavailable.\n");
+            }
+        }
+
+        private void returnMovie()
+        {
+            string movieTitle;
+            Console.WriteLine("Enter movie title:");
+            movieTitle = Console.ReadLine();
+            
+
+            if ((moc.movieExists(movieTitle)) && loggedInUser.userHasMovie(movieTitle)) // If movie exists and has copies available
+            {
+                moc.getMovieByTitle(movieTitle).addCopies(1);
+                loggedInUser.returnMovie(movieTitle);
+            }
+            else
+            {
+                Console.WriteLine(movieTitle + " not found.\n");
+            }
+        }
+
+        private string listBorrowedMovies()
+        {
+            return loggedInUser.listBorrowedMovies();
         }
     }
 }

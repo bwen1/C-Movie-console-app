@@ -45,6 +45,11 @@ namespace ConsoleApp1
             copiesAvailable += copies;
         }
 
+        public void movieBorrowed()
+        {
+            timesBorrowed++;
+        }
+
         public void rentMovie()
         {
             if (!(copiesAvailable > 0)) 
