@@ -40,6 +40,11 @@ namespace ConsoleApp1
             return copiesAvailable;
         }
 
+        public int getTimesBorrowed()
+        {
+            return timesBorrowed;
+        }
+
         public void addCopies(int copies)
         {
             copiesAvailable += copies;

@@ -69,7 +69,7 @@ namespace ConsoleApp1
                     break;
 
                 case 5:
-                    //memberLogin();
+                    displayTopTen(); // TODO
                     break;
 
             }
@@ -92,7 +92,7 @@ namespace ConsoleApp1
             return intSelection;
         }
 
-        private string printMovies()
+        private string printMovies() // TODO
         {
             // BST traversal
             return null;
@@ -137,6 +137,11 @@ namespace ConsoleApp1
         private string listBorrowedMovies()
         {
             return loggedInUser.listBorrowedMovies();
+        }
+
+        private string displayTopTen() // TO DO
+        {
+            return null;
         }
     }
 }

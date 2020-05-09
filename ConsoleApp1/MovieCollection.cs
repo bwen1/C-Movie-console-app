@@ -77,7 +77,7 @@ namespace ConsoleApp1
 
 
 
-        public bool add(Movie movie)
+        public bool add(Movie movie) // Not recursive??
         {
             Node before = null;
             Node after = this.root;
@@ -159,8 +159,66 @@ namespace ConsoleApp1
             return true;
         }
 
+        public bool removeMovie(string movie) // To Do
+        {
+            return true;
+        }
 
+        private string displayTopTen()
+        {
+            
+            return null;
+        }
 
+        private void quickSort(Movie[] titles, int start, int end)
+        {
+            if (start < end)
+            {
+                int pivot = partition(titles, start, end);
 
-    }
+                if (pivot > 1)
+                {
+                    quickSort(titles, start, pivot - 1);
+                }
+                if (pivot + 1 < end)
+                {
+                    quickSort(titles, pivot + 1, end);
+                }
+            }
+
+        }
+
+        private int partition(Movie[] titles, int start, int end)
+        {
+            int pivot = titles[start].getTimesBorrowed();
+            while (true)
+            {
+                while (titles[start].getTimesBorrowed() < pivot)
+                {
+                    start++;
+                }
+
+                while (titles[end].getTimesBorrowed() > pivot)
+                {
+                    end--;
+                }
+
+                if (start < end)
+                {
+                    if (titles[start].getTimesBorrowed() == titles[end].getTimesBorrowed())
+                    {
+                        return end;
+                    }
+
+                    Movie temp = titles[start];
+                    titles[start] = titles[end];
+                    titles[end] = temp;
+                }
+                else
+                {
+                    return end;
+                }
+            }
+        }
+    } 
 }

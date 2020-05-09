@@ -65,7 +65,7 @@ namespace ConsoleApp1
                     break;
 
                 case 2:
-                    //removeMovie();
+                    removeMovie(); // TODO
                     break;
 
                 case 3:
@@ -312,6 +312,11 @@ namespace ConsoleApp1
             }
             else Console.WriteLine("Member not found");
 
+        }
+
+        private string removeMovie() // TODO
+        {
+            return null;
         }
     }
 }
