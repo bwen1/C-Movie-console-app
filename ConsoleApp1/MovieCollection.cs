@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace ConsoleApp1
 {
     class Node
     {
+        
         private Node leftNode;
         private Node rightNode;
         private Node parentNode;
         private Movie data;
+        private static Movie[] movieArray;
+        private static int moviesInBST = 0;
+        private static int index;
 
         public Node(Node p)
         {
@@ -19,6 +24,11 @@ namespace ConsoleApp1
             leftNode = null;
             rightNode = null;
 
+        }
+
+        public Node getNodeFromMovie(Movie m) // TODO
+        {
+            return null;
         }
 
         public Node getLeftNode()
@@ -41,6 +51,11 @@ namespace ConsoleApp1
             rightNode = n;
         }
 
+        public void setParentNode(Node n)
+        {
+            parentNode = n;
+        }
+
         public Node getParentNode()
         {
             return parentNode;
@@ -49,6 +64,7 @@ namespace ConsoleApp1
         public void setMovie(Movie movie)
         {
             data = movie;
+            moviesInBST++; // Count how many movies in BST
         }
 
         public Movie getMovie()
@@ -62,22 +78,149 @@ namespace ConsoleApp1
             return data.getTitle();
         }
 
+        public char getMySide() // Return which side of tree node is on
+        {
+            if (parentNode == null) return 'n';
+            if (parentNode.getLeftNode() == this) return 'l';
+            return 'r';
+        }
 
-        
+        public void removeSelf(MovieCollection moc) // Remove node
+        {
+            Node newChild = null;
+            Node newParent = null;
+            char mySide;
+            if(leftNode == null)
+            {
+                newChild = rightNode;
+            }
+            else if (rightNode == null)
+            {
+                newChild = leftNode;
+            }
+            else
+            {
+                newChild = rightNode;
+
+                Node leftMostNodeofRightChild = rightNode.findLeftMostNode();
+                leftNode.setParentNode(leftMostNodeofRightChild);
+                leftMostNodeofRightChild.setLeftNode(leftNode);
+
+            }
+            if (parentNode != null) {
+                newParent = parentNode;
+                mySide = getMySide();
+                if (mySide == 'l')
+                    newParent.setLeftNode(newChild);
+                else
+                    newParent.setRightNode(newChild);
+            } else
+            {
+                moc.setNewRoot(newChild);
+            }
+
+
+            if (newChild != null)
+            {
+                newChild.setParentNode(newParent);
+            }
+
+
+
+        }
+
+        public Node findLeftMostNode()
+        {
+            if (leftNode == null)
+                return this;
+            else
+                return leftNode.findLeftMostNode();
+
+        }
+
+        public void displayme() // Method used for testing BST
+        {
+            Console.WriteLine(data.getTitle());
+            if(leftNode != null)
+            {
+                Console.WriteLine("(Left: ");
+                leftNode.displayme();
+                Console.WriteLine("endLeft)");
+
+            }
+            if (rightNode != null)
+            {
+                Console.WriteLine("(Right: ");
+                rightNode.displayme();
+                Console.WriteLine("endRight)");
+
+            }
+        }
+
+        public Movie[] getMovieArray() // Convert BST to array NOT WORKING
+        {
+            movieArray = new Movie[moviesInBST];
+            index = 0;
+            recursiveIterate();
+            index = 0;
+            return movieArray;
+        }
+
+        public void recursiveIterate() // Function used by getMovieArray()
+        { 
+            movieArray[index] = data;
+            index++;
+            if (leftNode != null)
+            {
+                leftNode.recursiveIterate();
+            }
+            if (rightNode != null)
+            {
+                rightNode.recursiveIterate();
+            }
+        }
     }
+
+
 
     class MovieCollection
     {
         private Node root;
+        private Movie[] movieArray;
 
         public MovieCollection()
         {
             root = null;
         }
 
+        public void displayMovies() // Test function
+        {
+            if (root == null)
+            {
+                Console.WriteLine("There are no movies.");
+            }
+            else
+                root.displayme();
+        }
 
+        public void topTenArray()
+        {
+            if (root == null)
+            {
+                Console.WriteLine("There are no movies.");
+            }
+            else
+                movieArray = root.getMovieArray();
 
-        public bool add(Movie movie) // Not recursive??
+            quickSortDescending(movieArray, 0, movieArray.Length - 1);
+
+            /*foreach (Movie movie in movieArray)
+            {
+                Console.WriteLine(movie.getTitle() + " " + movieArray.Length);
+            }*/
+        }
+
+        public bool add(Movie movie) 
         {
             Node before = null;
             Node after = this.root;
@@ -116,7 +259,10 @@ namespace ConsoleApp1
             return true;
         }
 
-
+        public void setNewRoot(Node n)
+        {
+            root = n;
+        }
         public bool deleteMovie(Movie movie)
 
         {
@@ -148,7 +294,7 @@ namespace ConsoleApp1
             return null; // Movie doesn't exist
         }
 
-        public bool movieExists(string newTitle)
+        public bool movieExists(string newTitle) // Check if movie exists
         {
 
             if (getMovieByTitle(newTitle) == null)
@@ -161,16 +307,14 @@ namespace ConsoleApp1
 
         public bool removeMovie(string movie) // To Do
         {
+            Movie removeThis = getMovieByTitle(movie);
+            
             return true;
         }
 
-        private string displayTopTen()
-        {
-            
-            return null;
-        }
 
-        private void quickSort(Movie[] titles, int start, int end)
+
+        private void quickSortDescending(Movie[] titles, int start, int end) // Reversed quicksort
         {
             if (start < end)
             {
@@ -178,27 +322,27 @@ namespace ConsoleApp1
 
                 if (pivot > 1)
                 {
-                    quickSort(titles, start, pivot - 1);
+                    quickSortDescending(titles, start, pivot - 1);
                 }
                 if (pivot + 1 < end)
                 {
-                    quickSort(titles, pivot + 1, end);
+                    quickSortDescending(titles, pivot + 1, end);
                 }
             }
 
         }
 
-        private int partition(Movie[] titles, int start, int end)
+        private int partition(Movie[] titles, int start, int end) // Partioning function for quickSortDescending()
         {
             int pivot = titles[start].getTimesBorrowed();
             while (true)
             {
-                while (titles[start].getTimesBorrowed() < pivot)
+                while (titles[start].getTimesBorrowed() > pivot)
                 {
                     start++;
                 }
 
-                while (titles[end].getTimesBorrowed() > pivot)
+                while (titles[end].getTimesBorrowed() < pivot)
                 {
                     end--;
                 }

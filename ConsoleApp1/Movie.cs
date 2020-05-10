@@ -14,7 +14,7 @@ namespace ConsoleApp1
         private string classification;
         private string releaseDate;
         private int copiesAvailable;
-        private int timesBorrowed;
+        private int timesBorrowed = 0;
 
         
         public Movie(string title, string starring, string director, string duration, string genre, string classification, string releaseDate, int copiesAvailable)

@@ -62,6 +62,8 @@ namespace ConsoleApp1
 
                 case 1:
                     moc.add(createMovie());
+                    //moc.displayMovies(); // Testing
+                    moc.topTenArray(); // Testing
                     break;
 
                 case 2:

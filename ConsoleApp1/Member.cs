@@ -14,7 +14,7 @@ namespace ConsoleApp1
         private string userName;
 
         private const int maxMoviesBorrowed = 10;
-        public string[] movies;
+        public string[] movies = new string[10];
         private int iMovieNum;
 
         public Member(string firstName, string lastName, string address, string phoneNumber, string password)
