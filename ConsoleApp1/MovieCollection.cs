@@ -157,7 +157,47 @@ namespace ConsoleApp1
             }
         }
 
-        public Movie[] getMovieArray() // Convert BST to array NOT WORKING
+        public void displayAllMovies() // Displays all movies
+        {
+            Console.WriteLine("\n\nTitle: " + data.getTitle());
+            Console.WriteLine("Starring: " + data.getStarring());
+            Console.WriteLine("Director: " + data.getDirector());
+            Console.WriteLine("Genre: " + data.getGenre());
+            Console.WriteLine("Classification: " + data.getClassification());
+            Console.WriteLine("Duration: " + data.getDuration());
+            Console.WriteLine("Release Date: " + data.getReleaseDate());
+            Console.WriteLine("Copies Available: " + data.getCopiesAvailable());
+            Console.WriteLine("Times Borrowed: " + data.getTimesBorrowed());
+            if (leftNode != null)
+            {
+                leftNode.displayAllMovies();
+
+            }
+            if (rightNode != null)
+            {
+                rightNode.displayAllMovies();
+            }
+        }
+
+        public Node findNodeFromTitle(string title) // Find node from title // Not tested
+        {
+            if (data.getTitle() == title)
+            {
+                return getNodeFromMovie(data);
+            }
+            if (leftNode != null)
+            {
+                leftNode.findNodeFromTitle(title);
+            }
+            if (rightNode != null)
+            {
+                rightNode.findNodeFromTitle(title);
+            }
+
+            return null;
+        }
+
+        public Movie[] getMovieArray() // Convert BST to array
         {
             movieArray = new Movie[moviesInBST];
             index = 0;
@@ -200,7 +240,7 @@ namespace ConsoleApp1
                 Console.WriteLine("There are no movies.");
             }
             else
-                root.displayme();
+                root.displayAllMovies();
         }
 
         public void topTenArray()
@@ -214,10 +254,10 @@ namespace ConsoleApp1
 
             quickSortDescending(movieArray, 0, movieArray.Length - 1);
 
-            /*foreach (Movie movie in movieArray)
+            foreach (Movie movie in movieArray)
             {
-                Console.WriteLine(movie.getTitle() + " " + movieArray.Length);
-            }*/
+                Console.WriteLine(movie.getTitle() + " borrowed " + movie.getTimesBorrowed() + " times.");
+            }
         }
 
         public bool add(Movie movie) 
@@ -263,14 +303,6 @@ namespace ConsoleApp1
         {
             root = n;
         }
-        public bool deleteMovie(Movie movie)
-
-        {
-            // TODO
-            return true;
-
-        }
-
 
         public Movie getMovieByTitle(string movieTitle)
         {
@@ -307,8 +339,9 @@ namespace ConsoleApp1
 
         public bool removeMovie(string movie) // To Do
         {
-            Movie removeThis = getMovieByTitle(movie);
-            
+            Node nodeToRemove = root.findNodeFromTitle(movie);
+            //nodeToRemove.removeSelf();
+     
             return true;
         }
 

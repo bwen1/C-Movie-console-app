@@ -14,10 +14,11 @@ namespace ConsoleApp1
         public MemberMenu (Program pr)
         {
             p = pr;
-            mc = new MemberCollection();
-            moc = new MovieCollection();
+            mc = p.getMemberCollection();
+            moc = p.getMovieCollection();
 
         }
+
         public void memberLogin() // NOT WORKING
         {
             Console.WriteLine("\nEnter Username:");
@@ -25,10 +26,9 @@ namespace ConsoleApp1
             Console.WriteLine("Enter Password:");
             string password = Console.ReadLine();
 
-            if (mc.logIn(username, password) == null)
+            if (mc.logIn(username, password) == null) // Logon failed
             {
-                Console.WriteLine("\nYour logon information was incorrect.");
-                p.mainMenu();
+                return;
             }
 
             loggedInUser = mc.logIn(username, password);
@@ -49,15 +49,15 @@ namespace ConsoleApp1
             switch (memberSetUp())
             {
                 case 0:
-                    p.mainMenu();
-                    break;
+                    return;
 
                 case 1:
-                    printMovies(); // TODO
+                    printMovies(); 
                     break;
 
                 case 2:
                     borrowMovie(); // Not tested
+                    memberMenu();
                     break;
 
                 case 3:
@@ -66,10 +66,12 @@ namespace ConsoleApp1
 
                 case 4:
                     listBorrowedMovies(); // Not tested
+                    memberMenu();
                     break;
 
                 case 5:
-                    displayTopTen(); // TODO
+                    moc.topTenArray();
+                    memberMenu();
                     break;
 
             }
@@ -92,10 +94,10 @@ namespace ConsoleApp1
             return intSelection;
         }
 
-        private string printMovies() // TODO
+        private void printMovies()
         {
-            // BST traversal
-            return null;
+            moc.displayMovies();
+            memberMenu();
         }
 
         private void borrowMovie()
@@ -109,6 +111,8 @@ namespace ConsoleApp1
                 moc.getMovieByTitle(movieTitle).addCopies(-1); // Reducing available copies by 1
                 loggedInUser.borrowMovie(movieTitle); // Adding movie to member object
                 moc.getMovieByTitle(movieTitle).movieBorrowed(); // Keeping track of how many times movie is borrowed
+                Console.WriteLine("You have borrowed " + movieTitle + ".");
+                Console.Write(loggedInUser.listBorrowedMovies());
             }
             else
             {
@@ -137,11 +141,6 @@ namespace ConsoleApp1
         private string listBorrowedMovies()
         {
             return loggedInUser.listBorrowedMovies();
-        }
-
-        private string displayTopTen() // TO DO
-        {
-            return null;
         }
     }
 }

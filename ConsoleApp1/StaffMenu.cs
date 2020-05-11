@@ -17,8 +17,8 @@ namespace ConsoleApp1
         public StaffMenu(Program pr)
         {
             p = pr;
-            mc = new MemberCollection();
-            moc = new MovieCollection();
+            mc = p.getMemberCollection();
+            moc = p.getMovieCollection();
 
         }
 
@@ -39,7 +39,7 @@ namespace ConsoleApp1
             else
             {
                 Console.WriteLine("\nYour logon information was incorrect.");
-                p.mainMenu();
+                return;
             }
 
         }
@@ -57,13 +57,10 @@ namespace ConsoleApp1
             switch (staffSetUp())
             {
                 case 0:
-                    p.mainMenu();
-                    break;
+                    return;
 
                 case 1:
                     moc.add(createMovie());
-                    //moc.displayMovies(); // Testing
-                    moc.topTenArray(); // Testing
                     break;
 
                 case 2:
@@ -185,19 +182,19 @@ namespace ConsoleApp1
             switch (classificationInput())
             {
                 case 1:
-                    classification = "Drama";
+                    classification = "General (G)";
                     break;
 
                 case 2:
-                    classification = "Adventure";
+                    classification = "Parental Guidance (PG)";
                     break;
 
                 case 3:
-                    classification = "Family";
+                    classification = "Mature (M15+)";
                     break;
 
                 case 4:
-                    classification = "Action";
+                    classification = "Mature Accompanied (MA15+)";
                     break;
             }
 

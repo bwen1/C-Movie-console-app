@@ -12,7 +12,6 @@ namespace ConsoleApp1
 
         public MemberCollection()
         { 
-
             members = new Member[maxMemberNumber];
             iMemberNum = 0;
         }
@@ -30,14 +29,29 @@ namespace ConsoleApp1
         }
         public void addNewMember(Member member)
         {
-            if (member == null) return; // Member already registered
+            //Console.WriteLine("iMemberNum is: " + iMemberNum);
+            //Console.WriteLine(member.getUserName());
+            if (member == null)
+            {
+                Console.WriteLine("Something went wrong, perhaps the member is already registered.");
+                return; // Member already registered
+            }
+                
+
             if (iMemberNum == maxMemberNumber)
+            {
                 Console.WriteLine("You have reached the maximum member limit."); // Reached max limit
+                return;
+            }
+                
             else 
             {
-                members[iMemberNum++]= member;
+                members[iMemberNum]= member;
+                iMemberNum++;
                 Console.WriteLine("Successfully registered. There are now " + iMemberNum + " registered members.");
             }
+            //Console.WriteLine("iMemberNum is: " + iMemberNum);
+            //Console.WriteLine("Member username is " + members[iMemberNum - 1].getUserName());
         }
 
         public string findPhoneNumber(string fullName)
@@ -74,18 +88,27 @@ namespace ConsoleApp1
 
         public Member logIn(string username, string password)
         {
+
             if (members[0] != null)
             {
                 for (int i = 0; i < iMemberNum; i++)
                 {
                     if ((username == members[i].getUserName()) && (password == members[i].getPassword()))
                     {
-                        return members[i]; 
+                        Console.Write(members[i].getUserName() + members[i].getPassword());
+                        Console.WriteLine(username + password);
+                        return members[i];
                     }
                 }
+                Console.WriteLine("\nLogon information incorrect.");
                 return null;
             }
-            else return null;
+
+            else
+            {
+                Console.WriteLine("\nThere are no members registered.");
+                return null;
+            }
         }
     }
 }

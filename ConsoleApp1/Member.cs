@@ -54,8 +54,17 @@ namespace ConsoleApp1
                 Console.WriteLine("You have reached the maximum movies borrowed.\n"); // Reached max limit
             else
             {
-                movies[iMovieNum++] = movieTitle;
-                Console.WriteLine(movieTitle + " borrowed.\n");
+                for (int i = 0; i < iMovieNum + 1; i++)
+                {
+                    if ((i < iMovieNum) && (movies[i] != ""))
+                    {
+                        movies[iMovieNum] = movieTitle;
+                        iMovieNum++;
+                        Console.WriteLine(movies[iMovieNum - 1]);
+                        Console.WriteLine(iMovieNum);
+                    }
+                }
+                
             }
         }
 
@@ -78,7 +87,8 @@ namespace ConsoleApp1
             {
                 if (movieTitle.Equals(movies[i]))
                 {
-                    movies[iMovieNum--] = "" ; // Movie removed
+                    movies[iMovieNum] = "" ; // Movie removed
+                    iMovieNum--;
                     Console.WriteLine("Movie DVD returned.\n");
                     return;
                 }

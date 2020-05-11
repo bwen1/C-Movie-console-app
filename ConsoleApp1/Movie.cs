@@ -45,6 +45,35 @@ namespace ConsoleApp1
             return timesBorrowed;
         }
 
+        public string getStarring()
+        {
+            return starring;
+        }
+
+        public string getDirector()
+        {
+            return director;
+        }
+
+        public string getDuration()
+        {
+            return duration;
+        }
+
+        public string getGenre()
+        {
+            return genre;
+        }
+
+        public string getClassification()
+        {
+            return classification;
+        }
+        public string getReleaseDate()
+        {
+            return releaseDate;
+        }
+
         public void addCopies(int copies)
         {
             copiesAvailable += copies;

@@ -8,17 +8,27 @@ namespace ConsoleApp1
         private static bool exitApp = false;
         private MemberMenu mm;
         private StaffMenu sm;
- 
+        private MemberCollection mc;
+        private MovieCollection moc;
+
 
         public Program()
         {
+            mc = new MemberCollection();
+            moc = new MovieCollection();
             mm = new MemberMenu(this);
             sm = new StaffMenu(this);
+            
+
         }
 
         static void Main(string[] args)
         {
             Program p = new Program();
+            Movie testMovie = new Movie("Jaws", "Person", "Director", "90", "Horror", "General (G)", "1600", 3);
+            Member testMember = new Member("Mike", "Chen", "1234 Pl", "1234567890", "1234");
+            p.moc.add(testMovie);
+            p.mc.addNewMember(testMember);
 
             while (exitApp == false)
             {
@@ -27,7 +37,17 @@ namespace ConsoleApp1
             }
 
         }
-         
+        
+        public MovieCollection getMovieCollection()
+        {
+            return moc;
+        }
+
+        public MemberCollection getMemberCollection()
+        {
+            return mc;
+        }
+
         // Main Menu
         public void mainMenu()
         {
