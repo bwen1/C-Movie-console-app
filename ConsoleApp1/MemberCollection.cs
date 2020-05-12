@@ -95,8 +95,6 @@ namespace ConsoleApp1
                 {
                     if ((username == members[i].getUserName()) && (password == members[i].getPassword()))
                     {
-                        Console.Write(members[i].getUserName() + members[i].getPassword());
-                        Console.WriteLine(username + password);
                         return members[i];
                     }
                 }

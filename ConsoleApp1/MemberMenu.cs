@@ -56,16 +56,17 @@ namespace ConsoleApp1
                     break;
 
                 case 2:
-                    borrowMovie(); // Not tested
+                    borrowMovie(); 
                     memberMenu();
                     break;
 
                 case 3:
-                    returnMovie(); // Not tested
+                    returnMovie();
+                    memberMenu();
                     break;
 
                 case 4:
-                    listBorrowedMovies(); // Not tested
+                    listBorrowedMovies(); 
                     memberMenu();
                     break;
 
@@ -105,19 +106,24 @@ namespace ConsoleApp1
             string movieTitle;
             Console.WriteLine("Enter movie title:");
             movieTitle = Console.ReadLine();
-
-            if ((moc.movieExists(movieTitle)) && (moc.getMovieByTitle(movieTitle).getCopiesAvailable() > 0)) // If movie exists and has copies available
+            Movie movie = moc.getMovieByTitle(movieTitle);
+            if (movie == null) // If movie exists
             {
-                moc.getMovieByTitle(movieTitle).addCopies(-1); // Reducing available copies by 1
-                loggedInUser.borrowMovie(movieTitle); // Adding movie to member object
-                moc.getMovieByTitle(movieTitle).movieBorrowed(); // Keeping track of how many times movie is borrowed
-                Console.WriteLine("You have borrowed " + movieTitle + ".");
-                Console.Write(loggedInUser.listBorrowedMovies());
+                Console.WriteLine("Movie does not exist.");
+                return;
             }
-            else
+            int copiesAvailable = movie.getCopiesAvailable();
+            if (copiesAvailable <= 0) //  If movie has copies available
             {
                 Console.WriteLine(movieTitle + " is unavailable.\n");
+                return;
+                
             }
+            movie.addCopies(-1); // Reducing available copies by 1
+            loggedInUser.borrowMovie(movieTitle); // Adding movie to member object
+            movie.movieBorrowed(); // Keeping track of how many times movie is borrowed
+            Console.WriteLine("You have borrowed " + movieTitle + ".");
+            Console.Write(loggedInUser.listBorrowedMovies());
         }
 
         private void returnMovie()
@@ -138,9 +144,9 @@ namespace ConsoleApp1
             }
         }
 
-        private string listBorrowedMovies()
+        private void listBorrowedMovies()
         {
-            return loggedInUser.listBorrowedMovies();
+            Console.WriteLine(loggedInUser.listBorrowedMovies());
         }
     }
 }

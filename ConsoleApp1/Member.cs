@@ -14,7 +14,7 @@ namespace ConsoleApp1
         private string userName;
 
         private const int maxMoviesBorrowed = 10;
-        public string[] movies = new string[10];
+        public string[] movies;
         private int iMovieNum;
 
         public Member(string firstName, string lastName, string address, string phoneNumber, string password)
@@ -24,10 +24,19 @@ namespace ConsoleApp1
             this.phoneNumber = phoneNumber;
             this.password = password;
             this.userName = lastName + firstName;
-            iMovieNum = 0;
+            clearMovie();
+
 
         }
-
+        private void clearMovie()
+        {
+            movies = new string[maxMoviesBorrowed];
+            for (int i = 0; i < maxMoviesBorrowed; i++)
+            {
+                movies[i] = "";
+            }
+            iMovieNum = 0;
+        }
         public string getName()
         {
             return name;
@@ -51,21 +60,25 @@ namespace ConsoleApp1
         public void borrowMovie(string movieTitle)
         {
             if (iMovieNum == maxMoviesBorrowed)
-                Console.WriteLine("You have reached the maximum movies borrowed.\n"); // Reached max limit
-            else
             {
-                for (int i = 0; i < iMovieNum + 1; i++)
-                {
-                    if ((i < iMovieNum) && (movies[i] != ""))
-                    {
-                        movies[iMovieNum] = movieTitle;
-                        iMovieNum++;
-                        Console.WriteLine(movies[iMovieNum - 1]);
-                        Console.WriteLine(iMovieNum);
-                    }
-                }
-                
+                Console.WriteLine("You have reached the maximum movies borrowed.\n"); // Reached max limit
+                return;
             }
+                
+            
+            for (int i = 0; i < maxMoviesBorrowed; i++)
+            {
+                if (movies[i].Equals(""))
+                {
+                    movies[iMovieNum] = movieTitle;
+                    iMovieNum++;
+                    Console.WriteLine(movies[iMovieNum - 1]);
+                    Console.WriteLine(iMovieNum);
+                    return;
+                }
+            }
+                
+           
         }
 
         public bool userHasMovie(string movieTitle)
@@ -104,15 +117,18 @@ namespace ConsoleApp1
                 return "You have no borrowed movies.";
             }
 
-            for (int i = 0; i < iMovieNum; i++)
+            for (int i = 0; i < maxMoviesBorrowed; i++)
             {
-                if (i == 0) // If first movie in list, don't add comma
+                if (movies[i] != "")
                 {
-                    moviesBorrowed.Concat(movies[i]); 
-                }
-                else
-                {
-                    moviesBorrowed.Concat(", " + movies[i]);
+                    if (moviesBorrowed.Equals("")) // If first movie in list, don't add comma
+                    {
+                        moviesBorrowed = moviesBorrowed + movies[i];
+                    }
+                    else
+                    {
+                        moviesBorrowed = moviesBorrowed + ", " + movies[i];
+                    }
                 }
                 
             }

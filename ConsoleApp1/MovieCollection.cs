@@ -26,10 +26,6 @@ namespace ConsoleApp1
 
         }
 
-        public Node getNodeFromMovie(Movie m) // TODO
-        {
-            return null;
-        }
 
         public Node getLeftNode()
         {
@@ -138,20 +134,20 @@ namespace ConsoleApp1
 
         }
 
-        public void displayme() // Method used for testing BST
+        public void displayMe() // Method used for testing BST
         {
             Console.WriteLine(data.getTitle());
             if(leftNode != null)
             {
                 Console.WriteLine("(Left: ");
-                leftNode.displayme();
+                leftNode.displayMe();
                 Console.WriteLine("endLeft)");
 
             }
             if (rightNode != null)
             {
                 Console.WriteLine("(Right: ");
-                rightNode.displayme();
+                rightNode.displayMe();
                 Console.WriteLine("endRight)");
 
             }
@@ -179,19 +175,23 @@ namespace ConsoleApp1
             }
         }
 
-        public Node findNodeFromTitle(string title) // Find node from title // Not tested
+        public Node findNodeFromTitle(string title) // Find node from title 
         {
-            if (data.getTitle() == title)
+            if (data.getTitle().Equals(title))
             {
-                return getNodeFromMovie(data);
+                return this;
             }
             if (leftNode != null)
             {
-                leftNode.findNodeFromTitle(title);
+                Node findNode = leftNode.findNodeFromTitle(title);
+                if (findNode != null)
+                {
+                    return findNode;
+                }
             }
             if (rightNode != null)
             {
-                rightNode.findNodeFromTitle(title);
+                return rightNode.findNodeFromTitle(title);
             }
 
             return null;
@@ -233,7 +233,17 @@ namespace ConsoleApp1
             root = null;
         }
 
-        public void displayMovies() // Test function
+        public void displayMoviesBST() // Test function
+        {
+            if (root == null)
+            {
+                Console.WriteLine("There are no movies.");
+            }
+            else
+                root.displayMe();
+        }
+
+        public void displayMovies() // Displays all movies
         {
             if (root == null)
             {
@@ -243,7 +253,7 @@ namespace ConsoleApp1
                 root.displayAllMovies();
         }
 
-        public void topTenArray()
+        public void topTenArray() // Displays top 10 in terms of popularity
         {
             if (root == null)
             {
@@ -340,7 +350,11 @@ namespace ConsoleApp1
         public bool removeMovie(string movie) // To Do
         {
             Node nodeToRemove = root.findNodeFromTitle(movie);
-            //nodeToRemove.removeSelf();
+            if (nodeToRemove == null)
+            {
+                return false;
+            }
+            nodeToRemove.removeSelf(this);
      
             return true;
         }

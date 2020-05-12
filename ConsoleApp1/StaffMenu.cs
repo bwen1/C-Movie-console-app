@@ -61,10 +61,12 @@ namespace ConsoleApp1
 
                 case 1:
                     moc.add(createMovie());
+                    moc.displayMoviesBST();
+                    moc.displayMovies();
                     break;
 
                 case 2:
-                    removeMovie(); // TODO
+                    Console.WriteLine(removeMovie()); // TODO
                     break;
 
                 case 3:
@@ -315,7 +317,16 @@ namespace ConsoleApp1
 
         private string removeMovie() // TODO
         {
-            return null;
+            string title;
+            Console.WriteLine("Enter movie title: ");
+            title = Console.ReadLine();
+            bool removed = moc.removeMovie(title);
+            if (removed == false)
+            {
+                return "Movie not found.";
+            }
+
+            return "Movie has been removed.";
         }
     }
 }
