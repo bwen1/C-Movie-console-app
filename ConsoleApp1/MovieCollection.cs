@@ -351,11 +351,16 @@ namespace ConsoleApp1
 
         public bool removeMovie(string movie)  // Removes movie object from BST
         {
-            Node nodeToRemove = root.findNodeFromTitle(movie);
-            if (nodeToRemove == null)
+            if (root == null)
             {
                 return false;
             }
+         
+            if (root.findNodeFromTitle(movie) == null)
+            {
+                return false;
+            }
+            Node nodeToRemove = root.findNodeFromTitle(movie);
             nodeToRemove.removeSelf(this);
      
             return true;
