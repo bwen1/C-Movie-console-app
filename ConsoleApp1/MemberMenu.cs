@@ -112,6 +112,11 @@ namespace ConsoleApp1
                 Console.WriteLine("Movie does not exist.");
                 return;
             }
+            if (loggedInUser.userHasMovie(movieTitle))
+            {
+                Console.WriteLine("You already have this movie.");
+                return;
+            }
             int copiesAvailable = movie.getCopiesAvailable();
             if (copiesAvailable <= 0) //  If movie has copies available
             {

@@ -67,8 +67,7 @@ namespace ConsoleApp1
                     Console.WriteLine(removeMovie()); 
                     break;
 
-                case 3:
-                    
+                case 3:                  
                     mc.addNewMember(registerMember());
                     break;
 
@@ -239,9 +238,9 @@ namespace ConsoleApp1
             string assertNumber(string prompt)
             {
                 Console.WriteLine(prompt);
-
-                string stringInput = Console.ReadLine();
                 int intOutput;
+                string stringInput = Console.ReadLine();
+                // Ensures password is a 4 digit integer
                 while (!((int.TryParse(stringInput, out intOutput)) && ((intOutput >= 0))))
                 {
                     Console.WriteLine("Please input a number");

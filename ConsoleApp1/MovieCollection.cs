@@ -355,14 +355,14 @@ namespace ConsoleApp1
             {
                 return false;
             }
-         
+
             if (root.findNodeFromTitle(movie) == null)
             {
                 return false;
             }
             Node nodeToRemove = root.findNodeFromTitle(movie);
             nodeToRemove.removeSelf(this);
-     
+
             return true;
         }
 

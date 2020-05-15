@@ -101,7 +101,7 @@ namespace ConsoleApp1
             {
                 if (movieTitle.Equals(movies[i]))
                 {
-                    movies[iMovieNum] = "" ; // Movie removed
+                    movies[i] = "" ; // Movie removed
                     iMovieNum--;
                     Console.WriteLine("Movie DVD returned.\n");
                     return;
