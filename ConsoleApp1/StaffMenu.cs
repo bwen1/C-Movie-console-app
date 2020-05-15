@@ -240,16 +240,16 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(prompt);
 
-                string number = Console.ReadLine();
-                // Ensures password is a 4 digit integer
-                while (!(int.TryParse(number, out int numberInt)))
+                string stringInput = Console.ReadLine();
+                int intOutput;
+                while (!((int.TryParse(stringInput, out intOutput)) && ((intOutput >= 0))))
                 {
                     Console.WriteLine("Please input a number");
                     Console.WriteLine(prompt);
-                    number = Console.ReadLine();
+                    stringInput = Console.ReadLine();
                 }
 
-                return number;
+                return stringInput;
             }
         }
 
