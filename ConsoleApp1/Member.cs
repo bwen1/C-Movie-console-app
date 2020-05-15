@@ -50,7 +50,7 @@ namespace ConsoleApp1
         }
         // ACCESSORY FUNCTIONS
 
-        private void clearMovie() // Clears movies
+        private void clearMovie() // Clears movies array
         {
             movies = new string[maxMoviesBorrowed];
             for (int i = 0; i < maxMoviesBorrowed; i++)
@@ -73,7 +73,7 @@ namespace ConsoleApp1
             {
                 if (movies[i].Equals(""))
                 {
-                    movies[iMovieNum] = movieTitle;
+                    movies[i] = movieTitle;
                     iMovieNum++;
                     return;
                 }
@@ -84,7 +84,7 @@ namespace ConsoleApp1
 
         public bool userHasMovie(string movieTitle) // Return true if member has movie
         {
-            for (int i = 0; i < iMovieNum; i++)
+            for (int i = 0; i < maxMoviesBorrowed; i++)
             {
                 if (movieTitle.Equals(movies[i]))
                 {
@@ -97,7 +97,7 @@ namespace ConsoleApp1
 
         public void returnMovie(string movieTitle) // Returns the movie
         {
-            for (int i = 0; i < iMovieNum; i++)
+            for (int i = 0; i < maxMoviesBorrowed; i++)
             {
                 if (movieTitle.Equals(movies[i]))
                 {

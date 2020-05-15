@@ -44,7 +44,7 @@ namespace ConsoleApp1
             Console.WriteLine(" 4. List current borrowed movie DVDs");
             Console.WriteLine(" 5. Display top 10 most popular movies");
             Console.WriteLine(" 0. Return to main menu");
-            Console.WriteLine("==============================");
+            Console.WriteLine("=============================");
 
             switch (memberSetUp())
             {
