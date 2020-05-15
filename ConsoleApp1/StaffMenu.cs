@@ -61,12 +61,10 @@ namespace ConsoleApp1
 
                 case 1:
                     moc.add(createMovie());
-                    moc.displayMoviesBST();
-                    moc.displayMovies();
                     break;
 
                 case 2:
-                    Console.WriteLine(removeMovie()); // TODO
+                    Console.WriteLine(removeMovie()); 
                     break;
 
                 case 3:
