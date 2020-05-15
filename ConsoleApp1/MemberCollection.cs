@@ -27,6 +27,12 @@ namespace ConsoleApp1
             }
             return false;
         }
+
+        public int getIMemberNum()
+        {
+            return iMemberNum;
+        }
+
         public void addNewMember(Member member)
         {
             //Console.WriteLine("iMemberNum is: " + iMemberNum);

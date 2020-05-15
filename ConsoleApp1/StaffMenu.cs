@@ -325,8 +325,16 @@ namespace ConsoleApp1
             {
                 return "Movie not found.";
             }
-
+            removeMovieFromCustomers(title);
             return "Movie has been removed.";
+        }
+
+        private void removeMovieFromCustomers(string movie)
+        {
+            for (int i = 0; i < mc.getIMemberNum(); i++)
+            {
+                mc.members[i].returnMovie(movie);
+            }
         }
     }
 }

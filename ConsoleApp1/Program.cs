@@ -25,10 +25,6 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Program p = new Program();
-            Movie testMovie = new Movie("Jaws", "Person", "Director", "90", "Horror", "General (G)", "1600", 3);
-            Member testMember = new Member("Mike", "Chen", "1234 Pl", "1234567890", "1234");
-            p.moc.add(testMovie);
-            p.mc.addNewMember(testMember);
 
             while (exitApp == false)
             {

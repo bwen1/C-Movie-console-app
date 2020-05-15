@@ -86,6 +86,7 @@ namespace ConsoleApp1
             Node newChild = null;
             Node newParent = null;
             char mySide;
+            moviesInBST--;
             if(leftNode == null)
             {
                 newChild = rightNode;
@@ -258,6 +259,7 @@ namespace ConsoleApp1
             if (root == null)
             {
                 Console.WriteLine("There are no movies.");
+                return;
             }
             else
                 movieArray = root.getMovieArray();
@@ -347,7 +349,7 @@ namespace ConsoleApp1
             return true;
         }
 
-        public bool removeMovie(string movie) // To Do
+        public bool removeMovie(string movie) 
         {
             Node nodeToRemove = root.findNodeFromTitle(movie);
             if (nodeToRemove == null)
@@ -358,6 +360,8 @@ namespace ConsoleApp1
      
             return true;
         }
+
+        
 
 
 

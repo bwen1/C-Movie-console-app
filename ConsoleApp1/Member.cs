@@ -72,8 +72,6 @@ namespace ConsoleApp1
                 {
                     movies[iMovieNum] = movieTitle;
                     iMovieNum++;
-                    Console.WriteLine(movies[iMovieNum - 1]);
-                    Console.WriteLine(iMovieNum);
                     return;
                 }
             }
@@ -106,7 +104,6 @@ namespace ConsoleApp1
                     return;
                 }
             }
-            Console.WriteLine("Something went wrong.\n"); // Shouldn't be possible to reach here
         }
 
         public string listBorrowedMovies()
@@ -129,8 +126,7 @@ namespace ConsoleApp1
                     {
                         moviesBorrowed = moviesBorrowed + ", " + movies[i];
                     }
-                }
-                
+                } 
             }
             return "You are borrowing: \n" + moviesBorrowed;
         }
