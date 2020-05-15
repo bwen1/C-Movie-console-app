@@ -19,7 +19,7 @@ namespace ConsoleApp1
 
         }
 
-        public void memberLogin() // NOT WORKING
+        public void memberLogin() // Member login
         {
             Console.WriteLine("\nEnter Username:");
             string username = Console.ReadLine();
@@ -35,7 +35,7 @@ namespace ConsoleApp1
             memberMenu();
         }
 
-        public void memberMenu()
+        public void memberMenu() // Member menu
         {
             Console.WriteLine("\n=========Member Menu=========");
             Console.WriteLine(" 1. Display all movies");
@@ -78,7 +78,7 @@ namespace ConsoleApp1
             }
         }
 
-        private int memberSetUp()
+        private int memberSetUp() // Ensures member menu selections are within range
         {
             Console.WriteLine("\n\nPlease make a selection (1-5, or 0 to return to main menu):");
             string stringSelection = Console.ReadLine();
@@ -95,13 +95,13 @@ namespace ConsoleApp1
             return intSelection;
         }
 
-        private void printMovies()
+        private void printMovies() // Prints movies
         {
             moc.displayMovies();
             memberMenu();
         }
 
-        private void borrowMovie()
+        private void borrowMovie() // Adds movie to member object array
         {
             string movieTitle;
             Console.WriteLine("Enter movie title:");
@@ -126,7 +126,7 @@ namespace ConsoleApp1
             Console.Write(loggedInUser.listBorrowedMovies());
         }
 
-        private void returnMovie()
+        private void returnMovie() // Returns movie and removes it from member object array
         {
             string movieTitle;
             Console.WriteLine("Enter movie title:");
@@ -144,7 +144,7 @@ namespace ConsoleApp1
             }
         }
 
-        private void listBorrowedMovies()
+        private void listBorrowedMovies() // List movies that member has borrowed
         {
             Console.WriteLine(loggedInUser.listBorrowedMovies());
         }

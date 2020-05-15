@@ -28,15 +28,7 @@ namespace ConsoleApp1
 
 
         }
-        private void clearMovie()
-        {
-            movies = new string[maxMoviesBorrowed];
-            for (int i = 0; i < maxMoviesBorrowed; i++)
-            {
-                movies[i] = "";
-            }
-            iMovieNum = 0;
-        }
+        // ACCESSORY FUNCTIONS
         public string getName()
         {
             return name;
@@ -56,8 +48,19 @@ namespace ConsoleApp1
         {
             return phoneNumber;
         }
+        // ACCESSORY FUNCTIONS
 
-        public void borrowMovie(string movieTitle)
+        private void clearMovie() // Clears movies
+        {
+            movies = new string[maxMoviesBorrowed];
+            for (int i = 0; i < maxMoviesBorrowed; i++)
+            {
+                movies[i] = "";
+            }
+            iMovieNum = 0;
+        }
+
+        public void borrowMovie(string movieTitle) // Borrows movie
         {
             if (iMovieNum == maxMoviesBorrowed)
             {
@@ -79,7 +82,7 @@ namespace ConsoleApp1
            
         }
 
-        public bool userHasMovie(string movieTitle)
+        public bool userHasMovie(string movieTitle) // Return true if member has movie
         {
             for (int i = 0; i < iMovieNum; i++)
             {
@@ -92,7 +95,7 @@ namespace ConsoleApp1
             return false; // Movie does not exist
         }
 
-        public void returnMovie(string movieTitle)
+        public void returnMovie(string movieTitle) // Returns the movie
         {
             for (int i = 0; i < iMovieNum; i++)
             {
@@ -106,7 +109,7 @@ namespace ConsoleApp1
             }
         }
 
-        public string listBorrowedMovies()
+        public string listBorrowedMovies() // Returns string of borrowed movies
         {
             string moviesBorrowed = "";
             if (iMovieNum == 0)

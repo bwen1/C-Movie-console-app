@@ -13,10 +13,10 @@ namespace ConsoleApp1
         public MemberCollection()
         { 
             members = new Member[maxMemberNumber];
-            iMemberNum = 0;
+            iMemberNum = 0; // Members in collection
         }
 
-        public bool checkMemberExists(string name)
+        public bool checkMemberExists(string name) // Boolean returns true if member exists
         {
             for (int i = 0; i < iMemberNum; i++)
             {
@@ -33,7 +33,7 @@ namespace ConsoleApp1
             return iMemberNum;
         }
 
-        public void addNewMember(Member member)
+        public void addNewMember(Member member) // Add new member object to collection
         {
             //Console.WriteLine("iMemberNum is: " + iMemberNum);
             //Console.WriteLine(member.getUserName());
@@ -60,7 +60,7 @@ namespace ConsoleApp1
             //Console.WriteLine("Member username is " + members[iMemberNum - 1].getUserName());
         }
 
-        public string findPhoneNumber(string fullName)
+        public string findPhoneNumber(string fullName) // Returns phone number from name
         {
             if (members[0] != null)
             {
@@ -76,7 +76,7 @@ namespace ConsoleApp1
             else return null;
         }
 
-        public Member getMemberFromName(string name)
+        public Member getMemberFromName(string name) // Returns member object from name
         {
             if (members[0] != null)
             {
@@ -92,7 +92,7 @@ namespace ConsoleApp1
             else return null;
         }
 
-        public Member logIn(string username, string password)
+        public Member logIn(string username, string password) // Accesses if log in details are correct
         {
 
             if (members[0] != null)

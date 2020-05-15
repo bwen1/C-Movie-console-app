@@ -30,6 +30,7 @@ namespace ConsoleApp1
 
         }
 
+        // ACCESSORY FUNCTIONS
         public string getTitle()
         {
             return title;
@@ -73,18 +74,19 @@ namespace ConsoleApp1
         {
             return releaseDate;
         }
+        // ACCESSORY FUNCTIONS
 
-        public void addCopies(int copies)
+        public void addCopies(int copies) // Add copies availables
         {
             copiesAvailable += copies;
         }
 
-        public void movieBorrowed()
+        public void movieBorrowed() // Increments movie times borrowed attribute
         {
             timesBorrowed++;
         }
 
-        public void rentMovie()
+        public void rentMovie() // Rents a DVD
         {
             if (!(copiesAvailable > 0)) 
             {

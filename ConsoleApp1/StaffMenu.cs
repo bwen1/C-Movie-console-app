@@ -100,7 +100,7 @@ namespace ConsoleApp1
 
         }
 
-        private Movie createMovie()
+        private Movie createMovie() // Creates movie object
         {
             string title;
             string starring;
@@ -256,7 +256,7 @@ namespace ConsoleApp1
         }
 
 
-        private Member registerMember()
+        private Member registerMember() // Registers new member
         {
             string firstName;
             string lastName;
@@ -292,7 +292,7 @@ namespace ConsoleApp1
 
         }
 
-        private void findPhoneNumber()
+        private void findPhoneNumber() // Finds phone number from name
         {
             string firstName;
             string lastName;
@@ -315,7 +315,7 @@ namespace ConsoleApp1
 
         }
 
-        private string removeMovie() // TODO
+        private string removeMovie() // Removes movie from BST
         {
             string title;
             Console.WriteLine("Enter movie title: ");

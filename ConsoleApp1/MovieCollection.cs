@@ -26,7 +26,7 @@ namespace ConsoleApp1
 
         }
 
-
+        // ACCESSORY FUNCTIONS
         public Node getLeftNode()
         {
             return leftNode;
@@ -68,7 +68,6 @@ namespace ConsoleApp1
             return data;
         }
 
-
         public string getTitle()
         {
             return data.getTitle();
@@ -80,6 +79,7 @@ namespace ConsoleApp1
             if (parentNode.getLeftNode() == this) return 'l';
             return 'r';
         }
+        // ACCESSORY FUNCTIONS
 
         public void removeSelf(MovieCollection moc) // Remove node
         {
@@ -126,7 +126,7 @@ namespace ConsoleApp1
 
         }
 
-        public Node findLeftMostNode()
+        public Node findLeftMostNode() // Returns left most node
         {
             if (leftNode == null)
                 return this;
@@ -272,7 +272,7 @@ namespace ConsoleApp1
             }
         }
 
-        public bool add(Movie movie) 
+        public bool add(Movie movie) // Add movie object to BST
         {
             Node before = null;
             Node after = this.root;
@@ -311,12 +311,12 @@ namespace ConsoleApp1
             return true;
         }
 
-        public void setNewRoot(Node n)
+        public void setNewRoot(Node n) // Sets new root
         {
             root = n;
         }
 
-        public Movie getMovieByTitle(string movieTitle)
+        public Movie getMovieByTitle(string movieTitle) // Returns movie object from title
         {
             Node before = null;
             Node after = this.root;
@@ -349,7 +349,7 @@ namespace ConsoleApp1
             return true;
         }
 
-        public bool removeMovie(string movie) 
+        public bool removeMovie(string movie)  // Removes movie object from BST
         {
             Node nodeToRemove = root.findNodeFromTitle(movie);
             if (nodeToRemove == null)

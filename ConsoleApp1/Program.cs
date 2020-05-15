@@ -12,7 +12,7 @@ namespace ConsoleApp1
         private MovieCollection moc;
 
 
-        public Program()
+        public Program() // Setting up
         {
             mc = new MemberCollection();
             moc = new MovieCollection();
@@ -22,6 +22,8 @@ namespace ConsoleApp1
 
         }
 
+
+        /// Main 
         static void Main(string[] args)
         {
             Program p = new Program();
@@ -71,7 +73,7 @@ namespace ConsoleApp1
             }
 
         }
-        int menuSetUp()
+        int menuSetUp() // Ensures member menu selections are within range
         {
             Console.WriteLine("\n\nPlease make a selection (1-2, or 0 to exit):");
             string stringSelection = Console.ReadLine();
