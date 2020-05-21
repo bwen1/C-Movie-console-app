@@ -265,10 +265,15 @@ namespace ConsoleApp1
                 movieArray = root.getMovieArray();
 
             quickSortDescending(movieArray, 0, movieArray.Length - 1);
-
+            int moviesPrinted = 0;
             foreach (Movie movie in movieArray)
             {
+                if (moviesPrinted >= 10) // Ensures max 10 movies are printed
+                {
+                    return;
+                }
                 Console.WriteLine(movie.getTitle() + " borrowed " + movie.getTimesBorrowed() + " times.");
+                moviesPrinted++;
             }
         }
 
